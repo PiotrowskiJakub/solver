@@ -1,0 +1,56 @@
+swagger: '2.0'
+info:
+  title: Solver
+  version: '1.0'
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /solve:
+    post:
+      operationId: app.solve
+      summary: Solves almost all problems
+      parameters:
+        - name: jobs
+          in: body
+          description: Array of jobs
+          required: true
+          schema:
+            $ref: '#/definitions/Job'
+      responses:
+        200:
+          description: Return scheduled jobs
+          schema:
+            $ref: '#/definitions/Job'
+        422:
+          description: Incorrect body
+
+definitions:
+  Job:
+    type: object
+    required:
+      - jobs
+    properties:
+      jobs:
+        type: array
+        items:
+          type: object
+          required:
+            - name
+            - times
+          properties:
+            name:
+              type: string
+            times:
+              type: array
+              items:
+                type: integer
+    example:
+      jobs:
+        - name: 'frezowanie'
+          times: [3, 2, 2, 1, 4, 2]
+        - name: 'wiercenie'
+          times: [3, 4, 2, 2, 1, 4]
+        - name: 'szlifowanie'
+          times: [4, 1, 1, 2, 2, 5]
