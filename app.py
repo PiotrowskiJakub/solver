@@ -2,9 +2,12 @@
 
 import connexion
 
+from genetic import genetic
+
 
 def solve(jobs):
-    return jobs
+    times_list = list(map(lambda job: job['times'], jobs['jobs']))
+    return genetic(times_list)
 
 
 app = connexion.App(__name__)
