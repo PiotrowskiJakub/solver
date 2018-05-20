@@ -7,7 +7,9 @@ from genetic import genetic
 
 def solve(jobs):
     times_list = list(map(lambda job: job['times'], jobs['jobs']))
-    return genetic(times_list)
+    scheduled_times = genetic(times_list)
+    scheduled_jobs = [jobs['jobs'][i - 1] for i in scheduled_times]
+    return {'jobs': scheduled_jobs}
 
 
 app = connexion.App(__name__)
